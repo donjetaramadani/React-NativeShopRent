@@ -4,8 +4,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import CustomButton from '../components/CustomButton';
 import InputField from '../components/InputField';
-import { TokenProvider } from '../navigation/TokenContext';
-
+import { useToken } from '../TokenContext';
 
 const LoginScreen = (props) => {
   const { getToken, saveToken } = useToken();

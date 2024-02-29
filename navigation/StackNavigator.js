@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import LoginScreen from '../screens/LoginScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import RegisterScreen from '../screens/RegisterScreen'; 
-import { useToken } from "./TokenContext";
+import { useToken } from "../TokenContext";
 
 const Stack = createStackNavigator();
 

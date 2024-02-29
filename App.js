@@ -2,7 +2,6 @@ import React from 'react';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
 import MyTabs from './navigation/BottomTab';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 //import CarsList from './components/CarsList';
 //import Header from './components/Header';
 

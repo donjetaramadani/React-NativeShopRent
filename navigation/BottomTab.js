@@ -5,12 +5,11 @@ import { View, StyleSheet } from 'react-native';
 import ProductScreen from '../screens/ProductScreen';
 import CartScreen from '../screens/CartScreen';
 import Profile from '../screens/ProfileScreen';
+import { TokenProvider } from '../TokenContext';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import CarsList from '../components/CarsList';
 import AuthStackNavigator from './StackNavigator';
 import InfoScreen from '../screens/InfoScreen';
-import { TokenProvider } from './TokenContext';
-
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
