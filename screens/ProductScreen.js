@@ -6,6 +6,7 @@ import Swiper from 'react-native-swiper';
 import styles from "./css/ProductStyle";
 import Header from '../components/Header';
 
+
 class ProductScreen extends Component {
   constructor(props) {
     super(props);
@@ -64,11 +65,15 @@ class ProductScreen extends Component {
     this.setState({ modalVisible: false });
   };
 
+  /*
   render() {
     const { products, loading, refreshing } = this.state;
+*/
 
-
-
+render() {
+  //const { products, loading, refreshing, navigation } = this.props; 
+  const { refreshing } = this.state;
+  const { navigation } = this.props;
 
     return (
       <View style={styles.container}>
@@ -91,25 +96,28 @@ class ProductScreen extends Component {
             }>
             <Text style={{ fontSize: 22, fontWeight: "bold", padding: 20, color: '#fff' }}>Categories</Text>
             <ScrollView horizontal={true}>
-              <View style={styles.categoryWrapper}>
-                <TouchableOpacity>
+
+
+            <View style={styles.categoryWrapper}>
+                <TouchableOpacity onPress={() => navigation.navigate('AudiScreen')}>
                   <View style={styles.categoryImage}>
                     <Image
-                      source={require('../assets/Icons/mustang.png')}
-                      style={{ width: 64, height: 64 }}
+                      source={require('../assets/Icons/audi.png')}
+                      style={{ width: 64, height: 64, resizeMode: 'contain'  }}
                     />
                   </View>
                   <View style={styles.categoryName}>
-                    <Text style={styles.categoryText}>Mustang</Text>
+                    <Text style={styles.categoryText}>Audi</Text>
                   </View>
                 </TouchableOpacity>
               </View>
+
               <View style={styles.categoryWrapper}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('BentleyScreen')}>
                   <View style={styles.categoryImage}>
                     <Image
                       source={require('../assets/Icons/bently.png')}
-                      style={{ width: 64, height: 64 }}
+                      style={{ width: 64, height: 64, resizeMode: 'contain'  }}
                     />
                   </View>
                   <View style={styles.categoryName}>
@@ -117,8 +125,10 @@ class ProductScreen extends Component {
                   </View>
                 </TouchableOpacity>
               </View>
+
+              
               <View style={styles.categoryWrapper}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('LamborghiniScreen')}>
                   <View style={styles.categoryImage}>
                     <Image
                       source={require('../assets/Icons/Lamborghini.png')}
@@ -130,8 +140,25 @@ class ProductScreen extends Component {
                   </View>
                 </TouchableOpacity>
               </View>
+
               <View style={styles.categoryWrapper}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('MustangScreen')}>
+                  <View style={styles.categoryImage}>
+                        <Image
+                          source={require('../assets/Icons/mustang.png')}
+                          style={{ width: 64, height: 64, resizeMode: 'contain'  }}
+                        />
+                  </View>
+                  <View style={styles.categoryName}>
+                    <Text style={styles.categoryText}>Mustang</Text>
+                  </View>
+                </TouchableOpacity>
+              </View>
+
+
+
+              <View style={styles.categoryWrapper}>
+                <TouchableOpacity onPress={() => navigation.navigate('PorscheScreen')}>
                   <View style={styles.categoryImage}>
                     <Image
                       source={require('../assets/Icons/Porsche.png')}
@@ -143,115 +170,119 @@ class ProductScreen extends Component {
                   </View>
                 </TouchableOpacity>
               </View>
-              <View style={styles.categoryWrapper}>
-                <TouchableOpacity>
-                  <View style={styles.categoryImage}>
-                    <Image
-                      source={require('../assets/Icons/audi.png')}
-                      style={{ width: 64, height: 64 }}
-                    />
-                  </View>
-                  <View style={styles.categoryName}>
-                    <Text style={styles.categoryText}>Audi</Text>
-                  </View>
-                </TouchableOpacity>
-              </View>
+
+
             </ScrollView>
 
 
             {/* products items */}
             <Text style={{ fontSize: 22, fontWeight: "bold", padding: 20, color: '#fff' }}>Products</Text>
+
             <View style={styles.products}>
               <View style={styles.productWrapper}>
-                <TouchableOpacity onPress={this.openModal}>
-                  <View style={styles.productImage}>
-                    <Image
-                      source={require('../assets/images/car.jpg')}
-                      style={{ width: '100%', height: '100%', borderRadius: 10 }}
-                    />
-                  </View>
-                  <View style={styles.productName}>
-                    <Text style={{ fontSize: 16, color: 'white',  textAlign: 'center', textAlignVertical: 'center'  }}>Cars</Text>
-                  </View>
+                <TouchableOpacity>
+                        <View style={styles.productImage}>
+                          <Image
+                            source={require('../assets/images/car.jpg')}
+                            style={{ width: '100%', height: '100%', borderRadius: 10 }}
+                          />
+                        </View>
+                        <View style={styles.productName}>
+                          <Text style={{ fontSize: 16, color: 'white',  textAlign: 'center', textAlignVertical: 'center'  }}>Cars</Text>
+                        </View>
 
                 
-
-                  <View style={styles.productAction}>
-                    <TouchableOpacity style={styles.cartBtn}>
-                      <Text style={{ color: 'white' }}>Explore More</Text>
-                    </TouchableOpacity>
-                  </View>
-                </TouchableOpacity>
+                  
+                        <View style={styles.productAction}>
+                          <TouchableOpacity style={styles.cartBtn} onPress={() => navigation.navigate('CarsScreen')}>
+                            <Text style={{ color: 'white' }}>Explore More</Text>
+                          </TouchableOpacity>
+                        </View>
+                  </TouchableOpacity>
               </View>
+             
+
+
               <View style={styles.productWrapper}>
-                <TouchableOpacity onPress={this.openModal}>
-                  <View style={styles.productImage}>
-                    <Image
-                      source={require('../assets/images/one.jpg')}
-                      style={{ width: '100%', height: '100%', borderRadius: 10 }}
-                    />
-                  </View>
-                  <View style={styles.productName}>
-                    <Text style={{ fontSize: 16, color: 'white',  textAlign: 'center', textAlignVertical: 'center'  }}>Accessories</Text>
-                  </View>
+                <TouchableOpacity>
+                      <View style={styles.productImage}>
+                        <Image
+                          source={require('../assets/images/one.jpg')}
+                          style={{ width: '100%', height: '100%', borderRadius: 10 }}
+                        />
+                      </View>
+                      <View style={styles.productName}>
+                        <Text style={{ fontSize: 16, color: 'white',  textAlign: 'center', textAlignVertical: 'center'  }}>Accessories</Text>
+                      </View>
 
                  
-
-                  <View style={styles.productAction}>
-                    <TouchableOpacity style={styles.cartBtn}>
-                      <Text style={{ color: 'white' }}>Explore More</Text>
-                    </TouchableOpacity>
-                  </View>
-                </TouchableOpacity>
+       
+                        
+                              <View style={styles.productAction}>
+                                <TouchableOpacity style={styles.cartBtn} onPress={() => navigation.navigate('AccessoriesScreen')}>
+                                  <Text style={{ color: 'white' }}>Explore More</Text>
+                                </TouchableOpacity>
+                              </View>
+                        </TouchableOpacity>
               </View>
+
+
               <View style={styles.productWrapper}>
-                <TouchableOpacity onPress={this.openModal}>
-                  <View style={styles.productImage}>
-                    <Image
-                      source={require('../assets/images/zu.jpg')}
-                      style={{ width: '100%', height: '100%', borderRadius: 10 }}
-                    />
-                  </View>
-                  <View style={styles.productName}>
-                    <Text style={{ fontSize: 16, color: 'white',  textAlign: 'center', textAlignVertical: 'center'  }}>Life Style</Text>
-                  </View>
+                <TouchableOpacity>
+                      <View style={styles.productImage}>
+                        <Image
+                          source={require('../assets/images/zu.jpg')}
+                          style={{ width: '100%', height: '100%', borderRadius: 10 }}
+                        />
+                      </View>
+                      <View style={styles.productName}>
+                        <Text style={{ fontSize: 16, color: 'white',  textAlign: 'center', textAlignVertical: 'center'  }}>Life Style</Text>
+                      </View>
 
                   
-
-                  <View style={styles.productAction}>
-                    <TouchableOpacity style={styles.cartBtn}>
-                      <Text style={{ color: 'white' }}>Explore More</Text>
-                    </TouchableOpacity>
-                  </View>
-                </TouchableOpacity>
+       
+                    
+                            <View style={styles.productAction}>
+                              <TouchableOpacity style={styles.cartBtn} onPress={() => navigation.navigate('HomeLifeStyleScreen')}>
+                                <Text style={{ color: 'white' }}>Explore More</Text>
+                              </TouchableOpacity>
+                            </View>
+                      </TouchableOpacity>
               </View>
+
+
               <View style={styles.productWrapper}>
-                <TouchableOpacity onPress={this.openModal}>
-                  <View style={styles.productImage}>
-                    <Image
-                      source={require('../assets/images/pa.jpg')}
-                      style={{ width: '100%', height: '100%', borderRadius: 10 }}
-                    />
-                  </View>
-                  <View style={styles.productName}>
-                    <Text style={{ fontSize: 16, color: 'white', textAlign: 'center', textAlignVertical: 'center'  }}>Services</Text>
-                  </View>
+                <TouchableOpacity>
+                        <View style={styles.productImage}>
+                          <Image
+                            source={require('../assets/images/pa.jpg')}
+                            style={{ width: '100%', height: '100%', borderRadius: 10 }}
+                          />
+                        </View>
+                        <View style={styles.productName}>
+                          <Text style={{ fontSize: 16, color: 'white', textAlign: 'center', textAlignVertical: 'center'  }}>Services</Text>
+                        </View>
 
+       
+               
+                              <View style={styles.productAction}>
+                                <TouchableOpacity style={styles.cartBtn} onPress={() => navigation.navigate('BrowseScreen')}>
+                                  <Text style={{ color: 'white' }}>Explore More</Text>
+                                </TouchableOpacity>
+                              </View>
+                          </TouchableOpacity>
 
-                  <View style={styles.productAction}>
-                    <TouchableOpacity style={styles.cartBtn}>
-                      <Text style={{ color: 'white' }}>Explore More</Text>
-                    </TouchableOpacity>
-                  </View>
-                </TouchableOpacity>
               </View>
             </View>
           </ScrollView>
         </View>
-</View>        
+</View>   
     );
   }
+
 }
+
+
 
 
 

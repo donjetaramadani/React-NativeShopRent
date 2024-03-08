@@ -11,6 +11,7 @@ import CarsList from '../components/CarsList';
 import AuthStackNavigator from './StackNavigator';
 import InfoScreen from '../screens/InfoScreen';
 
+
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
@@ -102,7 +103,6 @@ const MyTabs = (props) => {
                             ),
                         }}
                     />
-                 
                 </Tab.Navigator>
             </View>
         </TokenProvider>

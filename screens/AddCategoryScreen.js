@@ -1,13 +1,23 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Image, TouchableOpacity, Text } from 'react-native';
+import { View, TextInput, TouchableOpacity, Text, Image } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
+import { Ionicons } from '@expo/vector-icons';
+import { Button } from '../components'; // Assuming Button component is imported from another file
 
 const AddCategoryScreen = () => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
-    const [image, setImage] = useState({ value: '', error: '' })
-    const [type, setType] = useState({ value: '', error: '' })
-  
+    const [image, setImage] = useState('');
+
+    const categoryIcons = {
+        plants: 'leaf',
+        seeds: 'seedling',
+        flowers: 'flower',
+        sprayers: 'spray',
+        pots: 'flower-pot',
+        fertilizers: 'flask',
+    };
+
     const pickImage = async () => {
         try {
             let result = await ImagePicker.launchImageLibraryAsync({
@@ -16,96 +26,48 @@ const AddCategoryScreen = () => {
                 aspect: [4, 3],
                 quality: 1,
             });
-            if (!result.canceled) {
-              
-                setImage({value:result.assets[0].uri});
-                setType({value:result.assets[0].type})
-                
+            if (!result.cancelled) {
+                setImage(result.uri);
             }
         } catch (error) {
             console.error(error);
         }
     };
-  
-    const handleAddCategory = async () => {
-      try {
-        const formData = new FormData();
-        formData.append('name', name);
-        formData.append('description', description);
-  
-        if (image) {
-          // Get the file extension from the image URI
-          const uriComponents = image.value.split('.');
-          const fileExtension = uriComponents[uriComponents.length - 1].toLowerCase();
-  
-          
-          let fileType = 'image/jpeg'; 
-          if (fileExtension === 'png') {
-            fileType = 'image/png';
-          } else if (fileExtension === 'jpg' || fileExtension === 'jpeg') {
-            fileType = 'image/jpeg';
-          }
-  
-          formData.append('category_image', {
-                uri: image.value,
-                type: 'image/jpeg',
-                name: 'photo.jpeg',
-          });
-        }
-  
-        const response = await fetch('http://192.168.200.140:8000/products/allCategories/', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-          body: formData,
-        });
-  
-        console.log('Response status:', response.status);
-  
-        if (!response.ok) {
-          throw new Error('Network response was not ok.');
-        }
-  
-        // If the request was successful, reset the form
-        setName('');
-        setDescription('');
-        setImage({ value: '' });
 
-  
-        // Handle success scenario
-        console.log('Category added successfully!');
-      } catch (error) {
-        // Handle error scenario
-        console.error('Error adding category:', error.message);
-      }
+    const handleAddCategory = async () => {
+        try {
+            // Add your category addition logic here
+            console.log('Adding category:', name, description, image);
+        } catch (error) {
+            console.error('Error adding category:', error.message);
+        }
     };
-  
-  
- 
-  
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <TextInput
-        placeholder="Category Name"
-        onChangeText={(text) => setName(text)}
-        value={name}
-        style={{ width: '80%', marginBottom: 10, padding: 10, borderWidth: 1 }}
-      />
-      <TextInput
-        placeholder="Category Description"
-        onChangeText={(text) => setDescription(text)}
-        value={description}
-        style={{ width: '80%', marginBottom: 10, padding: 10, borderWidth: 1 }}
-        multiline
-      />
-      <TouchableOpacity onPress={pickImage} style={{ marginBottom: 10 }}>
-        <Text style={{ color: 'blue', fontSize: 16 }}>Select an image</Text>
-      </TouchableOpacity>
-      {image.value && <Image source={{ uri: image.value }} style={{ width: 200, height: 200, marginBottom: 10 }} />}
-      <Button title="Add Category" onPress={handleAddCategory} />
-    </View>
-  );
+
+    return (
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <TextInput
+                placeholder="Category Name"
+                onChangeText={(text) => setName(text)}
+                value={name}
+                style={{ width: '80%', marginBottom: 10, padding: 10, borderWidth: 1 }}
+            />
+            <TextInput
+                placeholder="Category Description"
+                onChangeText={(text) => setDescription(text)}
+                value={description}
+                style={{ width: '80%', marginBottom: 10, padding: 10, borderWidth: 1 }}
+                multiline
+            />
+            <TouchableOpacity onPress={pickImage} style={{ marginBottom: 10 }}>
+                <Text style={{ color: 'blue', fontSize: 16 }}>Select an image</Text>
+            </TouchableOpacity>
+            {image !== '' && <Image source={{ uri: image }} style={{ width: 200, height: 200, marginBottom: 10 }} />}
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Ionicons name={categoryIcons[name.toLowerCase()]} size={30} color="black" />
+                <Button title="Add Category" onPress={handleAddCategory} />
+            </View>
+        </View>
+    );
 };
 
 export default AddCategoryScreen;

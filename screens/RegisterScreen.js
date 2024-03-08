@@ -49,14 +49,14 @@ const RegisterScreen = (props) => {
     })
       .then((response) => response.json())
       .then((result) => {
-        // Handle the API response here
+     
         console.log('Register response:', result);
         saveToken(result.token);
-        // You can add logic to handle success or failure of registration
+        
       })
       .then(() => props.navigation.navigate('ProductScreen'))
       .catch((error) => {
-        // Handle errors here
+      
         console.error('Error:', error);
       });
   };
